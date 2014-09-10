@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Ethnicities Population Growth</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://leafletjs.com/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="header"><a href="http://georgetown.edu">
+    <img src="http://visualidentity.georgetown.edu/sites/all/themes/at_georgetown/images/np-georgetown.png" alt="Georgetown" width="auto" height="36">
+    <img src="http://visualidentity.georgetown.edu/sites/all/themes/at_georgetown/images/np-university.png" alt="University" width="auto" height="36"></a>
+</div>
+<div class="pageTitle">
+  <h1>Separate &amp; Unequal: All Ethnicities Population Growth</h1>
+  <ul class="selectMapDropdown">
+    <li><span>Select a different map</span> <span class="arrow-dwn"></span>
+      <ul>
+        <li><a href="draft3byEnrG.html">All Ethnicities Enrollment Growth</a></li>
+        <li><a href="draft3byPopG.html">All Ethnicities Population Growth</a></li>
+        <li><a href="draft3WhitesEnrG.html">Whites Enrollment Growth</a></li>
+        <li><a href="draft3WhitesPopG.html">Whites Population Growth</a></li>
+        <li><a href="draft3AAEnrG.html">African American Enrollment Growth</a></li>
+        <li><a href="draft3AAPopG.html">African American Population Growth</a></li>
+        <li><a href="draft3HispanicsEnrG.html">Hispanics Enrollment Growth</a></li>
+        <li><a href="draft3HispanicsPopG.html">Hispanics Population Growth</a></li>
+      </ul>
+    </li>
+  </ul>
+</div><!-- /pageTitle -->
+<div id="map"></div>
+<script src="http://leafletjs.com/dist/leaflet.js"></script>
+<script src='assets/data/us-statesAll.js'></script>
+<script type="text/javascript">
+  var map = L.map('map').setView([37.8, -96], 4);
+
+  L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+      'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    id: 'edgarr.iig85lao'
+  }).addTo(map);
+
+
+  // control that shows state info on hover
+  var info = L.control();
+
+  info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+  };
+
+  info.update = function (feature) {
+    this._div.innerHTML = '<h4>All Ethnicities Population Vs Enrollment Growth</h4>' + 
+    (feature ?
+      '<div><b>' + feature.name + '</b></div>' +
+      '<div class="PopGrowthWrapper">' + 'Population Growth: ' + feature.allPopGrowth + '%' + '</div>' +
+      '<div class="EnrollGrowthWrapper">' + 'Enrollment Growth: ' + feature.allEnrollGrowth + '%' + '</div>'
+      : 'Hover over a state'
+    );
+  };
+
+  info.addTo(map);
+
+
+  // get color depending on population density value
+  function getColor(d) {
+    return d > 90 ? '#e0e0e0' :
+        d > 80   ? '#bdbdbd' :
+        d > 70   ? '#939393' :
+        d > 60   ? '#7e7e7e' :
+        d > 50   ? '#696969' :
+        d > 40   ? '#545454' :
+        d > 30   ? '#3f3f3f' :
+        d > 20   ? '#2a2a2a' :
+        d > 10   ? '#151515' :
+        '#000';
+  }
+
+  function style(feature) {
+    return {
+      weight: 1,
+      opacity: 0.25,
+      color: '#111',
+      fillOpacity: 0.8,
+      fillColor: getColor(feature.properties.allPopGrowth)
+    };
+  }
+
+  function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+      weight: 1,
+      color: '#666',
+      dashArray: '',
+      fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera) {
+      layer.bringToFront();
+    }
+
+    info.update(layer.feature.properties);
+  }
+
+  var geojson;
+
+  function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+    info.update();
+  }
+
+  function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+  }
+
+  function onEachFeature(feature, layer) {
+    layer.on({
+      mouseover: highlightFeature,
+      mouseout: resetHighlight,
+      click: zoomToFeature
+    });
+  }
+
+  geojson = L.geoJson(statesData, {
+    style: style,
+    onEachFeature: onEachFeature
+  }).addTo(map);
+
+  // map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
+
+
+  var legend = L.control({position: 'bottomright'});
+
+  legend.onAdd = function (map) {
+
+    var aTitle = '<b>All Ethnicities<br>Population Growth</b><br><br>',
+    div = L.DomUtil.create('div', 'info legend'),
+      grades = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90],
+      labels = [],
+      from, to;
+
+    for (var i = 0; i < grades.length; i++) {
+      from = grades[i];
+      to = grades[i + 1];
+
+      labels.push(
+        '<i style="background:' + getColor(from + 1) + '"></i> ' +
+        from + (to ? '% &ndash; ' + to : '+'));
+    }
+
+    div.innerHTML = aTitle + labels.join('%<br>');
+    return div;
+  };
+
+  legend.addTo(map);
+</script>
+</body>
+</html>
