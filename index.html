@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Whites Population Growth</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://leafletjs.com/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+  
+  <div class="mapHeader">
+  <ul class="mapNavigation">
+    <li class="showWhitesPop"><span><b>Whites</b> Population <i>Growth</i></span></li>
+    <li class="showWhitesEnr"><span><b>Whites</b> Enrollment <i>Growth</i></span></li>
+    <li class="showAAPop"><span><b>African Americans</b> Population <i>Growth</i></span></li>
+    <li class="showAAEnr"><span><b>African Americans</b> Enrollment <i>Growth</i></span></li>
+    <li class="showHispanicsPop"><span><b>Hispanics</b> Population <i>Growth</i></span></li>
+    <li class="showHispanicsEnr"><span><b>Hispanics</b> Enrollment <i>Growth</i></span></li>
+    <li class="showAllPop"><span><b>All Ethnicities</b> Population <i>Growth</i></span></li>
+    <li class="showAllEnr"><span><b>All Ethnicities</b> Enrollment <i>Growth</i></span></li>
+  </ul>
+
+  </div>
+  <div class="mapWrapper">
+    <div id="map"></div>  
+  </div>
+  
+  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+</div>
+
+
+<script src="http://leafletjs.com/dist/leaflet.js"></script>
+<script src='assets/data/us-statesData.js'></script>
+<script src='assets/data/us-statesWhitesEnr.js'></script>
+<script type="text/javascript">
+
+$('.showWhitesPop').click(function() {
+  map.remove(map);
+  $.getScript( "assets/data/us-statesWhitesPop.js" );
+});
+$('.showWhitesEnr').click(function() {
+  map.remove(map);
+  $.getScript( "assets/data/us-statesWhitesEnr.js" );
+});
+
+$('.showAAPop').click(function() {
+  map.remove(map);
+  $.getScript( "assets/data/us-statesAAPop.js" );
+});
+$('.showAAEnr').click(function() {
+  map.remove(map);
+  $.getScript( "assets/data/us-statesAAEnr.js" );
+});
+
+$('.showHispanicsPop').click(function() {
+  map.remove(map);
+  $.getScript( "assets/data/us-statesHispanicsPop.js" );
+});
+$('.showHispanicsEnr').click(function() {
+  map.remove(map);
+  $.getScript( "assets/data/us-statesHispanicsEnr.js" );
+});
+
+
+$('.showAllPop').click(function() {
+  map.remove(map);
+  $.getScript( "assets/data/us-statesAllPop.js" );
+});
+$('.showAllEnr').click(function() {
+  map.remove(map);
+  $.getScript( "assets/data/us-statesAllEnr.js" );
+});
+
+
+</script>
+
+<script type="text/javascript">
+$('.mapNavigation li').click(function () {
+  $(this).siblings().removeClass('active');
+  $(this).addClass('active');
+});
+</script>
+
+</body>
+</html>
