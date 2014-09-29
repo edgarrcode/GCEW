@@ -39,15 +39,16 @@
         d > 60   ? '#2b8cbe' :
         d > 40   ? '#74a9cf' :
         d > 20   ? '#bdc9e1' :
-        '#f1eef6';
+        d > 0   ? '#f1eef6' :
+        '#f00';
   }
 
   function style(feature) {
     return {
       weight: 1,
-      opacity: 0.25,
-      color: '#111',
-      fillOpacity: 0.8,
+      opacity: 1,
+      color: '#047cc3',
+      fillOpacity: 0.9,
       fillColor: getColor(feature.properties.aaEnrollGrowth)
     };
   }
@@ -57,7 +58,7 @@
 
     layer.setStyle({
       weight: 1,
-      color: '#666',
+      color: '#047cc3',
       dashArray: '',
       fillOpacity: 0.7
     });
@@ -103,7 +104,7 @@
     var aTitle = '<div class="legendTitleWrapper">African American<div>Enrollment Growth</div></div>',
     div = L.DomUtil.create('div', 'info legend'),
       grades = [0, 20, 40, 60, 80],
-      labels = [],
+      labels = ['<i style="background:#f00; margin-left:10px;"></i> Less than 0'],
       from, to;
 
     for (var i = 0; i < grades.length; i++) {

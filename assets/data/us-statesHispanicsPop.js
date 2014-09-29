@@ -39,15 +39,16 @@
         d > 60   ? '#31a354' :
         d > 40   ? '#74c476' :
         d > 20   ? '#bae4b3' :
-        '#edf8e9';
+        d > 0   ? '#edf8e9' :
+        '#f00';
   }
 
   function style(feature) {
     return {
       weight: 1,
-      opacity: 0.25,
-      color: '#111',
-      fillOpacity: 0.8,
+      opacity: 1,
+      color: '#02944b',
+      fillOpacity: 0.9,
       fillColor: getColor(feature.properties.hPopGrowth)
     };
   }
@@ -57,7 +58,7 @@
 
     layer.setStyle({
       weight: 1,
-      color: '#666',
+      color: '#02944b',
       dashArray: '',
       fillOpacity: 0.7
     });
@@ -103,7 +104,7 @@
     var aTitle = '<div class="legendTitleWrapper">Hispanics<div>Population Growth</div></div>',
     div = L.DomUtil.create('div', 'info legend'),
       grades = [0, 20, 40, 60, 80],
-      labels = [],
+      labels = ['<i style="background:#f00; margin-left:10px;"></i> Less than 0'],
       from, to;
 
     for (var i = 0; i < grades.length; i++) {

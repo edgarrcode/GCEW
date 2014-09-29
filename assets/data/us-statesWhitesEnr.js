@@ -39,15 +39,16 @@
         d > 60   ? '#fbb4b9' :
         d > 40   ? '#f768a1' :
         d > 20   ? '#c51b8a' :
-        '#7a0177';
+        d > 0   ? '#7a0177' :
+        '#f00';
   }
 
   function style(feature) {
     return {
       weight: 1,
-      opacity: 0.25,
+      opacity: 1,
       color: '#fb017e',
-      fillOpacity: 0.8,
+      fillOpacity: .9,
       fillColor: getColor(feature.properties.wEnrollGrowth)
     };
   }
@@ -57,7 +58,7 @@
 
     layer.setStyle({
       weight: 1,
-      color: '#666',
+      color: '#fb017e',
       dashArray: '',
       fillOpacity: 0.7
     });
@@ -103,7 +104,7 @@
     var aTitle = '<div class="legendTitleWrapper">Whites<div>Enrollment Growth</div></div>',
     div = L.DomUtil.create('div', 'info legend'),
       grades = [0, 20, 40, 60, 80],
-      labels = [],
+      labels = ['<i style="background:#f00; margin-left:10px;"></i> Less than 0'],
       from, to;
 
     for (var i = 0; i < grades.length; i++) {
