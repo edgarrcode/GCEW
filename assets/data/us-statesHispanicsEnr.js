@@ -40,6 +40,7 @@
         d > 40   ? '#74c476' :
         d > 20   ? '#bae4b3' :
         d > 0   ? '#edf8e9' :
+        d == "Data not available"   ? '#fff' :
         '#f00';
   }
 
@@ -48,7 +49,7 @@
       weight: 1,
       opacity: 1,
       color: '#02944b',
-      fillOpacity: 0.9,
+      fillOpacity: 1,
       fillColor: getColor(feature.properties.hEnrollGrowth)
     };
   }
@@ -60,7 +61,7 @@
       weight: 1,
       color: '#02944b',
       dashArray: '',
-      fillOpacity: 0.7
+      fillOpacity: 1
     });
 
     if (!L.Browser.ie && !L.Browser.opera) {
@@ -101,7 +102,7 @@
 
   legend.onAdd = function (map) {
 
-    var aTitle = '<div class="legendTitleWrapper">Hispanics<div>Enrollment Growth</div></div>',
+    var aTitle = '<div class="legendTitleWrapper">Hispanic<div>Enrollment Growth</div></div>',
     div = L.DomUtil.create('div', 'info legend'),
       grades = [0, 20, 40, 60, 80],
       labels = ['<i style="background:#f00; margin-left:10px;"></i> Less than 0'],

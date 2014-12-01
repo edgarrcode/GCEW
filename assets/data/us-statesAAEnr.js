@@ -40,6 +40,7 @@
         d > 40   ? '#74a9cf' :
         d > 20   ? '#bdc9e1' :
         d > 0   ? '#f1eef6' :
+        d == "Data not available"   ? '#fff' :
         '#f00';
   }
 
@@ -48,7 +49,7 @@
       weight: 1,
       opacity: 1,
       color: '#047cc3',
-      fillOpacity: 0.9,
+      fillOpacity: 1,
       fillColor: getColor(feature.properties.aaEnrollGrowth)
     };
   }
@@ -60,7 +61,7 @@
       weight: 1,
       color: '#047cc3',
       dashArray: '',
-      fillOpacity: 0.7
+      fillOpacity: 1
     });
 
     if (!L.Browser.ie && !L.Browser.opera) {

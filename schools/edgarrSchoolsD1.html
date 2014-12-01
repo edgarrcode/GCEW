@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Custom marker tooltips</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
+<link href='css/schools.css' rel='stylesheet' />
+<script src="assets/data/schools.js"></script>
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  .leaflet-container p {font-size: 12px; line-height: 1.4; margin: 0}
+  .legendColorBox {display: block; float: left; width: 10px; height: 10px; background-color: red; margin: 2px 4px 0 0px;}
+    .ethnicityW .legendColorBox{background-color: #d289a2;}
+    .ethnicityAA .legendColorBox{background-color: #519aad;}
+    .ethnicityH .legendColorBox{background-color: #56af5e;}
+    .ethnicityA .legendColorBox{background-color: #e05e52;}
+    .ethnicityO .legendColorBox{background-color: #676767;}
+</style>
+</head>
+<body>
+<svg><defs>
+</defs></svg>
+
+
+    
+
+
+<div id='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.h186knp8')
+    .setView([37.8, -96], 4);
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+
+
+// Add custom popups to each using our custom feature properties
+myLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;
+
+    // Create custom popup content
+    var popupContent =
+        '<p><b>' + feature.properties.CollegeName + '</b></p>' +
+        '<p>Selectivity: <b>' + feature.properties.Selectivity + ' </b> / State: <b>'  + feature.properties.State +  '</b> / Region: <b>' + feature.properties.Region + '</b><p>' +
+        '<p><a target="_blank" href=http://' + feature.properties.URL + '>' + feature.properties.URL + '</a></p><hr>' +
+
+
+        '<div class="labelsWrapper">' +
+        '<p><b>' + feature.properties.FreshmanEnrollment + '</b> Freshman enrolled in 2008</p>' +
+        '<p class="ethnicityW ethnicitySquareColor"><span class="legendColorBox"></span>White: <b>' + feature.properties.White + '</b></p>' +
+        '<p class="ethnicityAA ethnicitySquareColor"><span class="legendColorBox"></span>African American: <b>' + feature.properties.AfricanAmerican + '</b></p>' +
+        '<p class="ethnicityH ethnicitySquareColor"><span class="legendColorBox"></span>Hispanic: <b>' + feature.properties.Hispanic + '</b></p>' +
+        '<p class="ethnicityA ethnicitySquareColor"><span class="legendColorBox"></span>Asian: <b>' + feature.properties.Asian + '</b></p>' +
+        '<p class="ethnicityO ethnicitySquareColor"><span class="legendColorBox"></span>Other: <b>' + feature.properties.Other + '</b></p>' +
+        '</div>' +
+		'<div class="svgWrapper"><svg width:"54" height="54">' + feature.properties.shapeID +'</svg></div>'
+    ;
+
+    // http://leafletjs.com/reference.html#popup
+    marker.bindPopup(popupContent,{
+        minWidth: 290
+    });
+    //Open popup on hover
+    myLayer.on('mouseover', function(e) {
+        e.layer.openPopup();
+    });
+    //Close popup on hover
+    //myLayer.on('mouseout', function(e) {
+        //e.layer.closePopup();
+    //});
+});
+
+// Add features to the map
+myLayer.setGeoJSON(geoJson);
+
+</script>
+
+
+</body>
+</html>

@@ -40,6 +40,7 @@
         d > 40   ? '#74a9cf' :
         d > 20   ? '#bdc9e1' :
         d > 0   ? '#f1eef6' :
+        d == "Data not available"   ? '#fff' :
         '#f00';
   }
 
@@ -48,7 +49,7 @@
       weight: 1,
       opacity: 1,
       color: '#047cc3',
-      fillOpacity: 0.9,
+      fillOpacity: 1,
       fillColor: getColor(feature.properties.aaPopGrowth)
     };
   }
@@ -60,7 +61,7 @@
       weight: 1,
       color: '#047cc3',
       dashArray: '',
-      fillOpacity: 0.7
+      fillOpacity: 1
     });
 
     if (!L.Browser.ie && !L.Browser.opera) {
@@ -101,7 +102,7 @@
 
   legend.onAdd = function (map) {
 
-    var aTitle = '<div class="legendTitleWrapper">African Americans<div>Population Growth</div></div>',
+    var aTitle = '<div class="legendTitleWrapper">African American<div>Population Growth</div></div>',
     div = L.DomUtil.create('div', 'info legend'),
       grades = [0, 20, 40, 60, 80],
       labels = ['<i style="background:#f00; margin-left:10px;"></i> Less than 0'],

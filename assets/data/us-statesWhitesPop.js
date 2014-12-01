@@ -40,6 +40,7 @@
         d > 40   ? '#f768a1' :
         d > 20   ? '#c51b8a' :
         d > 0   ? '#7a0177' :
+        d == "Data not available"   ? '#fff' :
         '#f00';
   }
 
@@ -48,7 +49,7 @@
       weight: 1,
       opacity: 1,
       color: '#fb017e',
-      fillOpacity: .9,
+      fillOpacity: 1,
       fillColor: getColor(feature.properties.wPopGrowth)
     };
   }
@@ -60,7 +61,7 @@
       weight: 1,
       color: '#fb017e',
       dashArray: '',
-      fillOpacity: 0.7
+      fillOpacity: 1
     });
 
     if (!L.Browser.ie && !L.Browser.opera) {
@@ -101,7 +102,7 @@
 
   legend.onAdd = function (map) {
 
-    var aTitle = '<div class="legendTitleWrapper">Whites<div>Population Growth</div></div>',
+    var aTitle = '<div class="legendTitleWrapper">White<div>Population Growth</div></div>',
     div = L.DomUtil.create('div', 'info legend'),
       grades = [0, 20, 40, 60, 80],
       labels = ['<i style="background:#f00; margin-left:10px;"></i> Less than 0'],

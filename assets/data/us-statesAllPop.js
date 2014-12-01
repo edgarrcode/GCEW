@@ -40,6 +40,7 @@
         d > 40   ? '#636363' :
         d > 20   ? '#969696' :
         d > 0   ? '#dddddd' :
+        d == "Data not available"   ? '#fff' :
         '#f00';
   }
 
@@ -48,7 +49,7 @@
       weight: 1,
       opacity: 1,
       color: '#777',
-      fillOpacity: .9,
+      fillOpacity: 1,
       fillColor: getColor(feature.properties.allPopGrowth)
     };
   }
@@ -60,7 +61,7 @@
       weight: 1,
       color: '#777',
       dashArray: '',
-      fillOpacity: 0.7
+      fillOpacity: 1
     });
 
     if (!L.Browser.ie && !L.Browser.opera) {
