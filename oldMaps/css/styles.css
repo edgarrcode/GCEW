@@ -1,0 +1,167 @@
+/*colors*/
+/*Mixins*/
+.box-shadow {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+.transition {
+  transition: all ease-in 150ms;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.fontLarge {
+  font-size: 18px;
+}
+.fontSmall {
+  font-size: 12px;
+}
+.fontSmallest {
+  font-size: 10px;
+}
+.fontBold {
+  font-weight: bold;
+}
+/*Styles*/
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+.container {
+  margin: 0 auto;
+  width: 1170px;
+}
+.mapHeader {
+  background-color: #011e41;
+  overflow: auto;
+}
+.mapNavigation {
+  background-color: #dddddd;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mapNavigation li {
+  float: left;
+  cursor: pointer;
+  position: relative;
+}
+.mapNavigation a {
+  color: #ffffff;
+  display: block;
+  line-height: 50px;
+}
+.mapNavigation li span {
+  font-size: 10px;
+  border-right: 1px solid #494949;
+  color: #ffffff;
+  display: block;
+  padding: 10px;
+  text-transform: uppercase;
+}
+.mapNavigation li span b {
+  font-size: 14px;
+  display: block;
+}
+.mapNavigation li span:hover {
+  background-color: #00205c;
+}
+.mapNavigation li.active span {
+  background-color: #212121;
+  color: #dddddd;
+  cursor: default;
+}
+.mapWrapper {
+  position: relative;
+  height: 500px;
+}
+#map {
+  color: #494949;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+/*VS Control*/
+.leaflet-left .leaflet-control {
+  padding: 0;
+  /*Reset Learleft CSS*/
+}
+.info {
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 6px 8px;
+  background: white;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.info h4 {
+  text-transform: uppercase;
+  font-weight: normal;
+  margin: 0 0 5px;
+}
+.VsTopBar {
+  background-color: #dddddd;
+  padding: 10px;
+  min-width: 300px;
+}
+.VsTopBar .VsStateTitle {
+  font-size: 18px;
+}
+.VSBottomBar {
+  overflow: auto;
+  padding: 0 10px;
+}
+.legendOpenPDF {
+  border-top: 1px solid #dddddd;
+  padding: 10px 0;
+  text-align: center;
+}
+.PopGrowthWrapper,
+.EnrollGrowthWrapper {
+  padding: 10px 0;
+  width: 47%;
+}
+.PopGrowthWrapper div,
+.EnrollGrowthWrapper div {
+  font-size: 18px;
+  font-weight: bold;
+}
+.PopGrowthWrapper {
+  float: left;
+  border-right: 1px solid #dddddd;
+}
+.EnrollGrowthWrapper {
+  float: right;
+}
+.legend {
+  text-align: left;
+  line-height: 18px;
+  padding: 0 0 7px 0;
+  color: #555;
+}
+.legend .legendTitleWrapper {
+  background-color: #dddddd;
+  margin-bottom: 7px;
+  padding: 10px;
+}
+.legend .legendTitleWrapper div {
+  font-weight: bold;
+}
+.legend .aGrade {
+  padding: 6px 10px 0;
+}
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+}
